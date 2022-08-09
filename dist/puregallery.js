@@ -6,7 +6,7 @@
  * @author: Arthur 'ArTDsL' Dias dos Santos Lasso
  * @version: 1.0b
  * @create: 2022-08-08
- * @update: 2022-08-08
+ * @update: 2022-08-09
  * @copyright: Copyright (c) 2022. Arthur 'ArTDsL' Dias dos Santos Lasso. All rights reserved.
  *
  * Distributed with no costs (FREE) on: https://github.com/ArTDsL/puregallery-js
@@ -37,13 +37,17 @@ function load_puregallery(){
 	});
 }
 function puregallery_nextImage(gallery_id){
-
+	__PRG__HideImages(gallery_id);
 }
 function puregallery_backImage(gallery_id){
-	
+	__PRG__HideImages(gallery_id);
 }
 function puregallery_showImage(gallery_id, image_id){
-
+	//hide images/show images
+	__PRG_HideImages(gallery_id);
+	__PRG_ShowImage(gallery_id, image_id);
+	//highlight the thumbnail image
+	__PRG_HighlightThumbnail(gallery_id, image_id);
 }
 /*
 	===================================================
@@ -97,6 +101,7 @@ function __PRG_LoadGalleryThumbnails(gallery_id, countImages){
 		}
 		thumbnail.setAttribute("data-pg-tb-gid", gallery_id);
 		thumbnail.setAttribute("data-pg-tb-pos", i);
+		thumbnail.setAttribute("OnClick", "puregallery_showImage(" + gallery_id + ", " + i + ");")
 		var src_image = document.querySelector("[data-pg-gid='" + gallery_id + "'][data-pg-pos='" + i + "']").style.backgroundImage;
 		thumbnail.setAttribute("style", "background-image: " + src_image);
 		document.querySelector("[data-pg-tbox-gid='" + gallery_id + "']").appendChild(thumbnail);
@@ -106,13 +111,23 @@ function __PRG_LoadGalleryThumbnails(gallery_id, countImages){
 function __PRG_FinishGalleryLoading(gallery_id){
 	var cpr = document.createElement("div");
 	cpr.setAttribute("class", "puregallery-cpr");
-	cpr.setAttribute("onClick", "window.location.href='https://artdsl.space/projects?location=en-US';")
+	cpr.setAttribute("onClick", "window.location.href='https://github.com/ArTDsL/puregallery-js/';");
 	document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(cpr);
 }
-function __PRG__HideImages(gallery_id){
+function __PRG_HideImages(gallery_id){
 	//this should run first (because he hides all gallery images)
-
+	document.querySelectorAll("[data-pg-gid='" + gallery_id + "']").forEach(function(element){
+		element.style.display = "none";
+	});
 }
-function __PRG__ShowImage(gallery_id, image_id){
-
+function __PRG_ShowImage(gallery_id, image_id){
+	document.querySelector("[data-pg-gid='" + gallery_id + "'][data-pg-pos='" + image_id + "']").style.display = 'block';
+}
+function __PRG_HighlightThumbnail(gallery_id, thumbnail_pos){
+	//remove highlights
+	document.querySelectorAll("[data-pg-tb-gid='" + gallery_id + "']").forEach(function(element){
+		element.classList.replace("puregallery-active", "puregallery-selected");
+	});
+	//set highlight on clicked image
+	document.querySelector("[data-pg-tb-gid='" + gallery_id + "'][data-pg-tb-pos='" + thumbnail_pos + "']").classList.replace("puregallery-selected", "puregallery-active");
 }
