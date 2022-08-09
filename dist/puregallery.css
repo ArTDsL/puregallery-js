@@ -95,3 +95,55 @@
 .puregallery-cpr::before{
     content: "Copyright \00a9  2022 Pure Gallery";
 }
+/* Left ~ Right Buttons */
+.puregallery-btn-left{
+    position: absolute;
+    display: block;
+    top: calc(50% - 5%);
+    width: 7.8%;
+    height: 10%;
+    padding: 0px 0px 0px 0px;
+    border-radius: 50px;
+    background-color: #00000052;
+    left: 2%;
+    font-family: 'Lato', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    color: #ffffff50;
+    z-index: 999;
+}
+.puregallery-btn-left::before{
+    position: absolute;
+    display: block;
+    left: calc(50% - 13px);
+    top: calc(50% - 23px);
+    content: "<";
+}
+.puregallery-btn-right{
+    position: absolute;
+    display: block;
+    top: calc(50% - 5%);
+    width: 7.8%;
+    height: 10%;
+    padding: 0px 0px 0px 0px;
+    border-radius: 50px;
+    background-color: #00000052;
+    right: 2%;
+    font-family: 'Lato', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    color: #ffffff50;
+    z-index: 999;
+}
+.puregallery-btn-right::before{
+    position: absolute;
+    display: block;
+    left: calc(50% - 13px);
+    top: calc(50% - 23px);
+    content: ">";
+}
+.puregallery-btn-right:hover, .puregallery-btn-left:hover{
+    box-shadow: 0px 0px 8px #ffffff1c;
+    cursor: pointer;
+    color: #fff;
+}

@@ -37,10 +37,25 @@ function load_puregallery(){
 	});
 }
 function puregallery_nextImage(gallery_id){
-	__PRG__HideImages(gallery_id);
+	__PRG_HideImages(gallery_id);
+	if(__PRG_CheckIfImageExists(gallery_id, (gallery_marker[gallery_id] + 1)) === 1){
+		gallery_marker[gallery_id] += 1;
+		puregallery_showImage(gallery_id, gallery_marker[gallery_id]);
+	}else{
+		gallery_marker[gallery_id] = 1;
+		puregallery_showImage(gallery_id, gallery_marker[gallery_id]);
+	}
 }
 function puregallery_backImage(gallery_id){
-	__PRG__HideImages(gallery_id);
+	__PRG_HideImages(gallery_id);
+	if(__PRG_CheckIfImageExists(gallery_id, (gallery_marker[gallery_id] - 1)) === 1){
+		gallery_marker[gallery_id] -= 1;
+		puregallery_showImage(gallery_id, gallery_marker[gallery_id]);
+	}else{
+		var countImages = document.querySelectorAll("[data-pg-gid='" + gallery_id + "']").length;
+		gallery_marker[gallery_id] = countImages;
+		puregallery_showImage(gallery_id, gallery_marker[gallery_id]);
+	}
 }
 function puregallery_showImage(gallery_id, image_id){
 	//hide images/show images
@@ -51,7 +66,7 @@ function puregallery_showImage(gallery_id, image_id){
 }
 /*
 	===================================================
-	PRG stands for PuReGallery...
+	PRG stands for (P)u(R)e(G)allery...
 	Functions under this comment are **internal only**,
 	that means =>  if you mess with something MAYBE the
 	code will stop work... BE CAREFUL!
@@ -113,6 +128,14 @@ function __PRG_FinishGalleryLoading(gallery_id){
 	cpr.setAttribute("class", "puregallery-cpr");
 	cpr.setAttribute("onClick", "window.location.href='https://github.com/ArTDsL/puregallery-js/';");
 	document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(cpr);
+	var btn_left = document.createElement("div");
+	btn_left.setAttribute("class", "puregallery-btn-left");
+	btn_left.setAttribute("onClick", "puregallery_backImage(" + gallery_id + ");");
+	document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(btn_left);
+	var btn_right = document.createElement("div");
+	btn_right.setAttribute("class", "puregallery-btn-right");
+	btn_right.setAttribute("onClick", "puregallery_nextImage(" + gallery_id + ");");
+	document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(btn_right);
 }
 function __PRG_HideImages(gallery_id){
 	//this should run first (because he hides all gallery images)
@@ -130,4 +153,11 @@ function __PRG_HighlightThumbnail(gallery_id, thumbnail_pos){
 	});
 	//set highlight on clicked image
 	document.querySelector("[data-pg-tb-gid='" + gallery_id + "'][data-pg-tb-pos='" + thumbnail_pos + "']").classList.replace("puregallery-selected", "puregallery-active");
+}
+function __PRG_CheckIfImageExists(gallery_id, image_id){
+	if(document.querySelector("[data-pg-gid='" + gallery_id + "'][data-pg-pos='" + image_id + "']") !== null){
+		return 1;
+	}else{
+		return 0;
+	}
 }
