@@ -51,7 +51,18 @@
     max-width: 100%;
     /*border: 1px solid white; DEBUG */
     text-align: center;
+    white-space: nowrap;
     z-index: 3;
+    overflow: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.puregallery-thumbnail-box::-webkit-scrollbar { 
+    display: none;
+}
+.puregallery-thumbnail-box:hover{
+    cursor: grab;
 }
 .puregallery-thumbnail{
     display: inline-block;

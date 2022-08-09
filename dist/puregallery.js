@@ -29,6 +29,8 @@
 	data-pg-tb-pos      Image position em Gallery Thumbnail ---(SET AUTOM.)
 	-----------------------------------------------------------------------
 */
+var dm_pos = { l:0,  x: 0};
+var act_dm = -1;
 var gallery_marker = [];
 //var gallery_autothrottle = [];
 function load_puregallery(){
@@ -65,7 +67,35 @@ function puregallery_showImage(gallery_id, image_id){
 	__PRG_ShowImage(gallery_id, image_id);
 	//highlight the thumbnail image
 	__PRG_HighlightThumbnail(gallery_id, image_id);
+	//update current image marker
+	gallery_marker[gallery_id] = image_id;
 }
+document.addEventListener('mousedown', function(e){
+	if(e.target && e.target.classList == "puregallery-thumbnail-box"){
+		act_dm = e.target.attributes["data-pg-tbox-gid"].value;
+		dm_pos = {
+			l : document.querySelector("[data-pg-tbox-gid='" + act_dm + "']").scrollLeft,
+			x : e.clientX
+		};
+		e.target.style.cursor = 'grabbing';
+	}
+});
+document.addEventListener('mousemove', function(e){
+	if(e.target && e.target.classList == "puregallery-thumbnail-box" && e.target.attributes["data-pg-tbox-gid"].value == act_dm){
+		var mx = e.clientX - dm_pos.x;
+	    document.querySelector("[data-pg-tbox-gid='" + act_dm + "']").scrollLeft = dm_pos.l - mx;
+	}
+});
+document.addEventListener('mouseup', function(e){
+	if(e.target && e.target.classList == "puregallery-thumbnail-box" && e.target.attributes["data-pg-tbox-gid"].value == act_dm){
+		e.target.style.cursor = 'grab';
+		dm_pos = {
+			l : 0,
+			x : 0
+		};
+		act_dm = -1;
+	}
+});
 /*
 	===================================================
 	PRG stands for (P)u(R)e(G)allery...
@@ -126,18 +156,24 @@ function __PRG_LoadGalleryThumbnails(gallery_id, countImages){
 	};
 }
 function __PRG_FinishGalleryLoading(gallery_id){
-	var cpr = document.createElement("div");
-	cpr.setAttribute("class", "puregallery-cpr");
-	cpr.setAttribute("onClick", "window.open('https://github.com/ArTDsL/puregallery-js/', '_blank');");
-	document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(cpr);
-	var btn_left = document.createElement("div");
-	btn_left.setAttribute("class", "puregallery-btn-left");
-	btn_left.setAttribute("onClick", "puregallery_backImage(" + gallery_id + ");");
-	document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(btn_left);
-	var btn_right = document.createElement("div");
-	btn_right.setAttribute("class", "puregallery-btn-right");
-	btn_right.setAttribute("onClick", "puregallery_nextImage(" + gallery_id + ");");
-	document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(btn_right);
+	if(document.querySelector("[data-pg-box='" + gallery_id + "']").querySelector(".puregallery-cpr") == null){
+		var cpr = document.createElement("div");
+		cpr.setAttribute("class", "puregallery-cpr");
+		cpr.setAttribute("onClick", "window.open('https://github.com/ArTDsL/puregallery-js/', '_blank');");
+		document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(cpr);
+	}
+	if(document.querySelector("[data-pg-box='" + gallery_id + "']").querySelector(".puregallery-btn-left") == null){
+		var btn_left = document.createElement("div");
+		btn_left.setAttribute("class", "puregallery-btn-left");
+		btn_left.setAttribute("onClick", "puregallery_backImage(" + gallery_id + ");");
+		document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(btn_left);
+	}
+	if(document.querySelector("[data-pg-box='" + gallery_id + "']").querySelector(".puregallery-btn-right") == null){
+		var btn_right = document.createElement("div");
+		btn_right.setAttribute("class", "puregallery-btn-right");
+		btn_right.setAttribute("onClick", "puregallery_nextImage(" + gallery_id + ");");
+		document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(btn_right);
+	}
 }
 /*function __PRG_AutoSwipe(){ //change images after 'x' seconds (must be set as 'data-pg-timer="seconds"')
 	
