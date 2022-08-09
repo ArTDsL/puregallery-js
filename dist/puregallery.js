@@ -22,6 +22,7 @@
 	data-pg-image       Image URL     -----------------(SET BY USER)
 	data-pg-gid         Gallery ID    -----------------(SET BY USER)
 	data-pg-pos         Image position em Gallery -----(SET BY USER)
+	data-pg-timer       Time to auto swipe image  -----(SET BY USER) | OPTIONAL
 	data-pg-box         Gallery ID ----------------------------(SET AUTOM.)
 	data-pg-tbox-gid    Gallery ID ----------------------------(SET AUTOM.)
 	data-pg-tb-gid      Gallery ID ----------------------------(SET AUTOM.)
@@ -29,6 +30,7 @@
 	-----------------------------------------------------------------------
 */
 var gallery_marker = [];
+//var gallery_autothrottle = [];
 function load_puregallery(){
 	//get all galleries
 	document.querySelectorAll("#puregallery").forEach(function(element){
@@ -126,7 +128,7 @@ function __PRG_LoadGalleryThumbnails(gallery_id, countImages){
 function __PRG_FinishGalleryLoading(gallery_id){
 	var cpr = document.createElement("div");
 	cpr.setAttribute("class", "puregallery-cpr");
-	cpr.setAttribute("onClick", "window.location.href='https://github.com/ArTDsL/puregallery-js/';");
+	cpr.setAttribute("onClick", "window.open('https://github.com/ArTDsL/puregallery-js/', '_blank');");
 	document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(cpr);
 	var btn_left = document.createElement("div");
 	btn_left.setAttribute("class", "puregallery-btn-left");
@@ -137,6 +139,9 @@ function __PRG_FinishGalleryLoading(gallery_id){
 	btn_right.setAttribute("onClick", "puregallery_nextImage(" + gallery_id + ");");
 	document.querySelector("[data-pg-box='" + gallery_id + "']").appendChild(btn_right);
 }
+/*function __PRG_AutoSwipe(){ //change images after 'x' seconds (must be set as 'data-pg-timer="seconds"')
+	
+}*/
 function __PRG_HideImages(gallery_id){
 	//this should run first (because he hides all gallery images)
 	document.querySelectorAll("[data-pg-gid='" + gallery_id + "']").forEach(function(element){
