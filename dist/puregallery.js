@@ -14,21 +14,19 @@
  *
  */
 /*
+	-----------------------------------------------------------------------
 	-- DEV PARAMS DATASHEET --
-
-	data-pg-gallery		Gallery ID    -----------------(SET BY USER)
-	data-pg-size		Gallery Size  -----------------(SET BY USER)
-	data-pg-image		Image URL     -----------------(SET BY USER)
-	data-pg-gid			Gallery ID    -----------------(SET BY USER)
-	data-pg-pos			Image position em Gallery -----(SET BY USER)
-	data-pg-box 		Gallery ID ----------------------------(SET AUTOM.)
+	-----------------------------------------------------------------------
+	data-pg-gallery     Gallery ID    -----------------(SET BY USER)
+	data-pg-size        Gallery Size  -----------------(SET BY USER)
+	data-pg-image       Image URL     -----------------(SET BY USER)
+	data-pg-gid         Gallery ID    -----------------(SET BY USER)
+	data-pg-pos         Image position em Gallery -----(SET BY USER)
+	data-pg-box         Gallery ID ----------------------------(SET AUTOM.)
 	data-pg-tbox-gid    Gallery ID ----------------------------(SET AUTOM.)
-	data-pg-tb-gid 		Gallery ID ----------------------------(SET AUTOM.)
-	data-pg-tb-pos		Image position em Gallery Thumbnail ---(SET AUTOM.)
-
-
-	
-
+	data-pg-tb-gid      Gallery ID ----------------------------(SET AUTOM.)
+	data-pg-tb-pos      Image position em Gallery Thumbnail ---(SET AUTOM.)
+	-----------------------------------------------------------------------
 */
 var gallery_marker = [];
 function load_puregallery(){
@@ -116,5 +114,5 @@ function __PRG__HideImages(gallery_id){
 
 }
 function __PRG__ShowImage(gallery_id, image_id){
-	
+
 }
