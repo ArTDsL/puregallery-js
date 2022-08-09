@@ -1,0 +1,149 @@
+/**
+ * 
+ * PUREGALLERY-JS
+ * 
+ * @file: puregallery.css
+ * @author: Arthur 'ArTDsL' Dias dos Santos Lasso
+ * @create: 2022-08-08
+ * @update: 2022-08-09
+ * @copyright: Copyright (c) 2022. Arthur 'ArTDsL' Dias dos Santos Lasso. All rights reserved.
+ * 
+ * Distributed with no costs (FREE) on: https://github.com/ArTDsL/puregallery-js
+ * under MIT License, DO NOT REMOVE THIS HEADER.
+ *
+ */
+#puregallery{
+    position: relative;
+    display: block;
+}
+.box-puregallery{
+    position: absolute;
+    display: block;
+    border: 3px solid #ffffff60;
+    border-radius: 4px;
+    z-index: 0;
+}
+.puregallery-image{
+    display: none;
+}
+/* Loaded gallery images */
+.puregallery-loaded-img{
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    position: absolute;
+    object-fit: cover;
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    background-position: top left;
+    background-size: cover;
+    z-index: 2;
+}
+.puregallery-thumbnail-box{
+    display: block;
+    position: absolute;
+    bottom: 2px;
+    max-height: 20%;
+    min-height: 20%;
+    min-width: 100%;
+    max-width: 100%;
+    /*border: 1px solid white; DEBUG */
+    text-align: center;
+    z-index: 3;
+}
+.puregallery-thumbnail{
+    display: inline-block;
+    position: relative;
+    max-width: 13%;
+    min-width: 13%;
+    min-height: 100px;
+    max-height: 100px;
+    z-index: 4;
+    border-radius: 65px;
+    margin-right: 2%;
+    box-shadow: 2px 2px 8px 0px #00000060;
+    background-size: cover;
+    background-position: center center;
+}
+.puregallery-selected{
+    border: 2px solid #ffffff30;
+}
+.puregallery-selected:hover{
+    border: 2px solid #ffffff80;
+    cursor: pointer;
+}
+.puregallery-active{
+    border: 2px solid #ffffff;
+    cursor: pointer;
+}
+.puregallery-cpr{
+    position: absolute;
+    display: block;
+    top: 1.5%;
+    text-align: right;
+    right: 1%;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    color: #ffffff20;
+    cursor: pointer;
+    z-index: 999;
+}
+.puregallery-cpr::before{
+    content: "Copyright \00a9  2022 Pure Gallery";
+}
+/* Left ~ Right Buttons */
+.puregallery-btn-left{
+    position: absolute;
+    display: block;
+    top: calc(50% - 5%);
+    width: 7.8%;
+    height: 10%;
+    padding: 0px 0px 0px 0px;
+    border-radius: 50px;
+    background-color: #00000052;
+    left: 2%;
+    font-family: 'Lato', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    color: #ffffff50;
+    z-index: 999;
+}
+.puregallery-btn-left::before{
+    position: absolute;
+    display: block;
+    left: calc(50% - 13px);
+    top: calc(50% - 23px);
+    content: "<";
+}
+.puregallery-btn-right{
+    position: absolute;
+    display: block;
+    top: calc(50% - 5%);
+    width: 7.8%;
+    height: 10%;
+    padding: 0px 0px 0px 0px;
+    border-radius: 50px;
+    background-color: #00000052;
+    right: 2%;
+    font-family: 'Lato', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    color: #ffffff50;
+    z-index: 999;
+}
+.puregallery-btn-right::before{
+    position: absolute;
+    display: block;
+    left: calc(50% - 13px);
+    top: calc(50% - 23px);
+    content: ">";
+}
+.puregallery-btn-right:hover, .puregallery-btn-left:hover{
+    box-shadow: 0px 0px 8px #ffffff1c;
+    cursor: pointer;
+    color: #fff;
+}
